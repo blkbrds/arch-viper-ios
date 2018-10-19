@@ -1,0 +1,11 @@
+language: objective-c
+osx_image: xcode10
+cache:
+  - bundler
+  - cocoapods
+install:
+  - set -o pipefail
+  - sudo systemsetup -settimezone Asia/Ho_Chi_Minh
+  - bundle install
+script:
+  - bundle exec fastlane main

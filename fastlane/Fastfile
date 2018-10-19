@@ -1,0 +1,101 @@
+default_platform :ios
+
+platform :ios do
+
+  desc "Main task: check branch, pod, linter, test, build, upload"
+  lane :main do
+      branch
+      cocoapods(use_bundle_exec: true, repo_update: true)
+      linter
+      test
+  end
+
+  lane :release do
+    build
+    upload
+  end
+
+  desc "Running all tests"
+  lane :test do
+    scan
+  end
+
+  desc "Check branch name"
+  lane :branch do
+    check_branch(show_name: true)
+  end
+
+  desc "Check swiftlint"
+  lane :linter do
+    swiftlint(mode: :lint,
+              config_file: ".swiftlint.yml",
+              reporter: "json > swiftlint-report.json",
+              ignore_exit_status: false,
+              executable: "./Pods/SwiftLint/swiftlint"
+    )
+    # linterbot(verbose: true)
+  end
+
+  desc "Build release for Staging"
+  lane :build do
+    build_app(
+     scheme: "Viper",
+     clean: true,
+     output_name: "Viper-STG.ipa",
+     output_directory: "fastlane/app/stg",
+     include_bitcode: false,
+     skip_profile_detection: true,
+     export_method: "enterprise",
+     export_options: {
+       provisioningProfiles: {
+          "vn.asiantech.dev.Viper" => "AT_Viper_InHouse_20180927"
+        }
+     }
+   )
+  end
+
+  desc "Build release for UAT"
+  lane :buildUAT do
+    build_app(
+     scheme: "Viper-Release-UAT",
+     clean: true,
+     output_name: "Viper-UAT.ipa",
+     output_directory: "fastlane/app/uat",
+     include_bitcode: false,
+     skip_profile_detection: true,
+     export_method: "enterprise",
+     export_options: {
+       provisioningProfiles: {
+          "vn.asiantech.dev.Viper" => "AT_Viper_InHouse_20180927"
+        }
+     }
+   )
+  end
+
+  desc "Build release for Production"
+  lane :buildPROD do
+    build_app(
+     scheme: "Viper-Release-PROD",
+     clean: true,
+     output_name: "Viper-PROD.ipa",
+     output_directory: "fastlane/app/prod",
+     include_bitcode: false,
+     skip_profile_detection: true,
+     export_method: "enterprise",
+     export_options: {
+       provisioningProfiles: {
+          "vn.asiantech.dev.Viper" => "AT_Viper_InHouse_20180927"
+        }
+     }
+   )
+  end
+
+  desc "Upload Staging app to Fabric"
+  lane :upload do
+    crashlytics(
+      ipa_path: "fastlane/app/stag/Viper-STG.ipa",
+      api_token: "xxx",
+      build_secret: "xxx"
+      )
+  end
+end

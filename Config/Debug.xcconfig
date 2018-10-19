@@ -1,0 +1,13 @@
+//
+//  Debug.xcconfig
+//  Viper
+//
+//  Created by Deploy on 9/27/18.
+//  Copyright © 2018 Asian Tech Co., Ltd. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "DEBUG"
+SWIFT_VERSION = 4.2

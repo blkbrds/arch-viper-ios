@@ -1,0 +1,21 @@
+//
+//  QuoteGraphView.swift
+//  Viper
+//
+//  Created by Dao Nguyen V. on 10/7/18.
+//  Copyright © 2018 Asian Tech Co., Ltd. All rights reserved.
+//
+
+import UIKit
+import Rswift
+
+final class QuoteGraphView: UIView {
+
+  @IBOutlet weak var infoLabel: UILabel?
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    infoLabel?.numberOfLines = 0
+  }
+
+}

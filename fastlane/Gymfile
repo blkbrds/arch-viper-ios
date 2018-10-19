@@ -1,0 +1,3 @@
+scheme "Viper"
+include_bitcode false
+clean true

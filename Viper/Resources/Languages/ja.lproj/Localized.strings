@@ -1,0 +1,24 @@
+/* 
+  Localized.strings
+  Viper
+
+  Created by Dao Nguyen V. on 9/27/18.
+  Copyright © 2018 Asian Tech Co., Ltd. All rights reserved.
+*/
+
+// MARK: - Tabbar Title
+demo.trade = "Demo";
+account.compare = "Compare";
+performance = "Performance";
+
+// MARK: - Demo Trade Screen
+demo.trade.title = "Demo Rate";
+profit.today.text = "Profit today %@円";
+
+// MARK: - Account Compare Screen
+// TODO: Change language
+account.compare.title = "Account Compare";
+
+// MARK: - Performance Screen
+// TODO: Change language
+performance.title = "Performance";
